@@ -10,19 +10,20 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPagerUtils;
 
-import com.contplayer.R;
+
 import com.contplayer.engine.ContPlayerCommandsManager;
 import com.contplayer.engine.IContPlayerQueue;
 import com.contplayer.engine.IViewBindListener;
 import com.contplayer.engine.SoloPlayer;
-import com.contplayer.utility.ContPlayerUtils;
+import com.contplayer.engine.ContPlayerUtils;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.library_core.R;
 
 import java.lang.ref.WeakReference;
 
-import static com.contplayer.utility.ContPlayerUtils.PLAYER_CURRENT;
-import static com.contplayer.utility.ContPlayerUtils.PLAYER_NEXT;
-import static com.contplayer.utility.ContPlayerUtils.PLAYER_PREVIOUS;
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_CURRENT;
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_NEXT;
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_PREVIOUS;
 
 public class ContPlayerView<T> extends FrameLayout {
 

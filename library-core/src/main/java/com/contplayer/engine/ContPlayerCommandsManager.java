@@ -2,8 +2,6 @@ package com.contplayer.engine;
 
 import android.content.Context;
 
-import com.contplayer.utility.ContPlayerUtils;
-
 public class ContPlayerCommandsManager {
 
     ContPlayer contPlayer;

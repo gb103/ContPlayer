@@ -6,8 +6,6 @@ import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.text.TextUtils;
 
-import com.contplayer.utility.ContPlayerUtils;
-
 import java.lang.ref.WeakReference;
 
 public class ContPlayer {
