@@ -43,21 +43,21 @@ ContPlayerView contPlayerView = findViewById(R.id.contPlayerView);
 contPlayerView.setLifecycleOwner(this);
     
 ```
-    
+
 b) Get the PlayerQueue feeded with player items    
 
 ```
 IContPlayerQueue contPlayerQueue = getStreamArrayList();
     
 ```
-     
+
 c) Initiate ContPlayerCommandsManager, it will take play, pause, release etc commands 
 
 ````
  ContPlayerCommandsManager contPlayerCommandsManager = new ContPlayerCommandsManager(this, contPlayerQueue);
     
 ```
-     
+
 d) set everything to ContPlayerView object
 
 ```
@@ -66,7 +66,7 @@ contPlayerView.setResizeMode(Const.RESIZE_MODE_FILL);
 contPlayerView.setPlayerQueue(contPlayerQueue);
     
 ```
-        
+
 e) start play of ContPlayer
 
 ```
@@ -74,6 +74,6 @@ new Handler().postDelayed(() -> contPlayerView.startPlay(), 300);
     
 ```
       
-      
+
 p.s. For any implementation doubts refer demo app, available in the same repository.
 
