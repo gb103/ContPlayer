@@ -10,7 +10,9 @@ Step by Step guide to implement this code into your app :
 
 1. Clone this repository.
 2. To use core part of ContPlayer,
+'''
 implementation project(':library-core')
+'''
 
 To use ui part as well :
 implementation project(':library-ui')
@@ -20,6 +22,8 @@ compileOptions {
     sourceCompatibility 1.8
     targetCompatibility 1.8
 }
+
+
 
 4. Create a class which will implement the interface IContPlayerQueue<T> and put the definitions of required functions.
 
