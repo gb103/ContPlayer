@@ -18,9 +18,11 @@ public class ContPlayerViewPagerAdapter<T> extends PagerAdapter {
 
     ArrayList<T> objectArrayList;
     OnVideoItemClilckListener onVideoItemClilckListener;
+    int resizeMode;
 
-    ContPlayerViewPagerAdapter(OnVideoItemClilckListener onVideoItemClilckListener) {
+    ContPlayerViewPagerAdapter(int resizeMode, OnVideoItemClilckListener onVideoItemClilckListener) {
         this.onVideoItemClilckListener = onVideoItemClilckListener;
+        this.resizeMode = resizeMode;
     }
 
     ContPlayerViewPagerAdapter(ArrayList<T> objectList) {
@@ -40,14 +42,13 @@ public class ContPlayerViewPagerAdapter<T> extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(container.getContext());
         final View view = layoutInflater.inflate(getItemLayoutId(), container, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onVideoItemClilckListener != null) {
-                    onVideoItemClilckListener.onVideoItemClicked(view);
-                }
+        view.setOnClickListener(v -> {
+            if(onVideoItemClilckListener != null) {
+                onVideoItemClilckListener.onVideoItemClicked(view);
             }
         });
+        PlayerView playerView = view.findViewById(R.id.player_view);
+        playerView.setResizeMode(resizeMode);
         container.addView(view);
         return view;
     }

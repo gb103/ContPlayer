@@ -68,6 +68,7 @@ public class SoloPlayerWorker implements ExoPlayer.EventListener {
                     .setPrioritizeTimeOverSizeThresholds(false)
                     .createDefaultLoadControl();
             player = ExoPlayerFactory.newSimpleInstance(mContext, renderersFactory, trackSelector, gaanaLoadControl, null, BANDWIDTH_METER);
+            player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
             player.addListener(this);
             maybeReportPlayerState();
         }

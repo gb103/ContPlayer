@@ -1,5 +1,9 @@
 package com.contplayer.ui;
 
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_CURRENT;
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_NEXT;
+import static com.contplayer.engine.ContPlayerUtils.PLAYER_PREVIOUS;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,20 +15,15 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPagerUtils;
 
-import com.contplayer.engine.ContPlayer;
 import com.contplayer.engine.ContPlayerCommandsManager;
+import com.contplayer.engine.ContPlayerUtils;
 import com.contplayer.engine.IContPlayerQueue;
 import com.contplayer.engine.IViewBindListener;
 import com.contplayer.engine.SoloPlayer;
-import com.contplayer.engine.ContPlayerUtils;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.library_ui.R;
 
 import java.lang.ref.WeakReference;
-
-import static com.contplayer.engine.ContPlayerUtils.PLAYER_CURRENT;
-import static com.contplayer.engine.ContPlayerUtils.PLAYER_NEXT;
-import static com.contplayer.engine.ContPlayerUtils.PLAYER_PREVIOUS;
 
 public class ContPlayerView<T> extends FrameLayout {
 
@@ -37,6 +36,9 @@ public class ContPlayerView<T> extends FrameLayout {
     private ViewBindListener viewBindListener;
     private LifecycleOwner lifecycleOwner;
     private boolean isPlaying;
+    private static final int DEFAULT_RESIZE_MODE = Const.RESIZE_MODE_FILL;
+
+
 
     public ContPlayerView(Context context) {
         this(context, null, -1);
@@ -46,47 +48,11 @@ public class ContPlayerView<T> extends FrameLayout {
         this(context, attrs, -1);
     }
 
-    class ContPlayerViewVideoItemClickListener implements OnVideoItemClilckListener {
-
-        WeakReference<ContPlayerView> contPlayerViewWeakReference;
-
-        ContPlayerViewVideoItemClickListener(ContPlayerView contPlayerView) {
-            this.contPlayerViewWeakReference = new WeakReference<>(contPlayerView);
-        }
-
-        @Override
-        public void onVideoItemClicked(View view) {
-            ContPlayerView contPlayerView = contPlayerViewWeakReference.get();
-            if(contPlayerView != null) {
-                contPlayerView.togglePlay(view);
-            }
-        }
-    }
-
-
-    /**
-     * when play-pause is clicked from the UI
-     * @param view
-     */
-    private void togglePlay(View view) {
-        ImageView playIcon = (ImageView) view.findViewById(R.id.play_icon);
-        if(isPlaying) {
-            contPlayerCommandsManager.pause();
-            isPlaying = false;
-        } else {
-            contPlayerCommandsManager.play();
-            isPlaying = true;
-        }
-        if(playIcon != null) {//show play  button when made the video pauses, else make visibility gone when
-            playIcon.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
-        }
-    }
-
     public ContPlayerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
-        init();
+        init(DEFAULT_RESIZE_MODE);
     }
 
     public ContPlayerView(Context context, LifecycleOwner lifecycleOwner) {
@@ -94,7 +60,7 @@ public class ContPlayerView<T> extends FrameLayout {
         mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
         this.lifecycleOwner = lifecycleOwner;
-        init();
+        init(DEFAULT_RESIZE_MODE);
     }
 
     /**
@@ -114,13 +80,13 @@ public class ContPlayerView<T> extends FrameLayout {
         return R.layout.cont_player_view;
     }
 
-    void init() {
+    void init(@Const.RESIZE_MODE int resizeMode) {
         View view = layoutInflater.inflate(getLayoutId(), this, false);
         viewBindListener = new ViewBindListener(this);
         viewPager = view.findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(2);
         ContPlayerViewVideoItemClickListener contPlayerViewVideoItemClickListener = new ContPlayerViewVideoItemClickListener(this);
-        adapter = new ContPlayerViewPagerAdapter(contPlayerViewVideoItemClickListener);
+        adapter = new ContPlayerViewPagerAdapter(resizeMode, contPlayerViewVideoItemClickListener);
         viewPager.setAdapter(adapter);
         VideoPageChangeListener videoPageChangeListener = new VideoPageChangeListener(this);
         viewPager.addOnPageChangeListener(videoPageChangeListener);
@@ -130,6 +96,10 @@ public class ContPlayerView<T> extends FrameLayout {
             lifecycleAwareContPlayerView.wrap(this);
             lifecycleOwner.getLifecycle().addObserver(lifecycleAwareContPlayerView);
         }
+    }
+
+    public void setResizeMode(@Const.RESIZE_MODE int resizeMode) {
+        adapter.resizeMode = resizeMode;
     }
 
     public void setContPlayerCommandsManager(ContPlayerCommandsManager contPlayerCommandsManager) {
@@ -256,6 +226,41 @@ public class ContPlayerView<T> extends FrameLayout {
     public void release() {
         if(contPlayerCommandsManager != null) {
             contPlayerCommandsManager.release();
+        }
+    }
+
+    /**
+     * when play-pause is clicked from the UI
+     * @param view
+     */
+    private void togglePlay(View view) {
+        ImageView playIcon = (ImageView) view.findViewById(R.id.play_icon);
+        if(isPlaying) {
+            contPlayerCommandsManager.pause();
+            isPlaying = false;
+        } else {
+            contPlayerCommandsManager.play();
+            isPlaying = true;
+        }
+        if(playIcon != null) {//show play  button when made the video pauses, else make visibility gone when
+            playIcon.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    class ContPlayerViewVideoItemClickListener implements OnVideoItemClilckListener {
+
+        WeakReference<ContPlayerView> contPlayerViewWeakReference;
+
+        ContPlayerViewVideoItemClickListener(ContPlayerView contPlayerView) {
+            this.contPlayerViewWeakReference = new WeakReference<>(contPlayerView);
+        }
+
+        @Override
+        public void onVideoItemClicked(View view) {
+            ContPlayerView contPlayerView = contPlayerViewWeakReference.get();
+            if(contPlayerView != null) {
+                contPlayerView.togglePlay(view);
+            }
         }
     }
 }
