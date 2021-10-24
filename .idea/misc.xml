@@ -4,6 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/cont_player_view.xml" value="0.2203125" />
+        <entry key="app/src/main/res/layout/pager_item.xml" value="0.2203125" />
+        <entry key="library-ui/src/main/res/drawable/ic_player_play_new.xml" value="0.22135416666666666" />
+        <entry key="library-ui/src/main/res/layout/cont_player_view.xml" value="0.20520833333333333" />
+        <entry key="library-ui/src/main/res/layout/pager_item.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>

@@ -7,16 +7,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.contplayer.R;
+
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.library_ui.R;
 
 import java.util.ArrayList;
 
 public class ContPlayerViewPagerAdapter<T> extends PagerAdapter {
 
     ArrayList<T> objectArrayList;
+    OnVideoItemClilckListener onVideoItemClilckListener;
 
-    ContPlayerViewPagerAdapter() {
-
+    ContPlayerViewPagerAdapter(OnVideoItemClilckListener onVideoItemClilckListener) {
+        this.onVideoItemClilckListener = onVideoItemClilckListener;
     }
 
     ContPlayerViewPagerAdapter(ArrayList<T> objectList) {
@@ -35,7 +39,15 @@ public class ContPlayerViewPagerAdapter<T> extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(container.getContext());
-        View view = layoutInflater.inflate(getItemLayoutId(), container, false);
+        final View view = layoutInflater.inflate(getItemLayoutId(), container, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onVideoItemClilckListener != null) {
+                    onVideoItemClilckListener.onVideoItemClicked(view);
+                }
+            }
+        });
         container.addView(view);
         return view;
     }

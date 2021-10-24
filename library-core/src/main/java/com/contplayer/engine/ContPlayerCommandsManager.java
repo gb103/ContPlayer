@@ -44,10 +44,16 @@ public class ContPlayerCommandsManager {
         contPlayer.prev();
     }
 
+    /**
+     * call to pause the contPlayer
+     */
     public void pause() {
         contPlayer.pause();
     }
 
+    /**
+     * call to play the contPlayer
+     */
     public void play() {
         contPlayer.play();
     }
@@ -56,6 +62,9 @@ public class ContPlayerCommandsManager {
         contPlayer.stop();
     }
 
+    /**
+     * release all the player instance when user exit the video play module
+     */
     public void release() {
         contPlayer.releaseAllPlayers();
     }
