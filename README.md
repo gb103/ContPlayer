@@ -10,18 +10,25 @@ Step by Step guide to implement this code into your app :
 
 1. Clone this repository.
 2. To use core part of ContPlayer,
-'''
+```
 implementation project(':library-core')
-'''
+
+```
 
 To use ui part as well :
+```
 implementation project(':library-ui')
 
+```
+
 3. Add compile options into the build.gradle
+```
 compileOptions {
     sourceCompatibility 1.8
     targetCompatibility 1.8
 }
+
+```
 
 
 
@@ -30,11 +37,17 @@ compileOptions {
 5. Initiate the ContPlayer, IContPlayerQueue, ContPlayerCommandsanager in the below manner,
 
 a) Init Object of ContPlayerView and set lifecycle owner as current activity or fragment
+    ```
     ContPlayerView contPlayerView = findViewById(R.id.contPlayerView);
     contPlayerView.setLifecycleOwner(this);
     
+    ```
+    
 b) Get the PlayerQueue feeded with player items     
+    ```
      IContPlayerQueue contPlayerQueue = getStreamArrayList();
+    
+    ```
      
 c) Initiate ContPlayerCommandsManager, it will take play, pause, release etc commands 
      ContPlayerCommandsManager contPlayerCommandsManager = new ContPlayerCommandsManager(this, contPlayerQueue);
