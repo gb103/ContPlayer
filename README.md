@@ -34,28 +34,32 @@ compileOptions {
 
 4. Create a class which will implement the interface IContPlayerQueue<T> and put the definitions of required functions.
 
-5. Initiate the ContPlayer, IContPlayerQueue, ContPlayerCommandsanager in the below manner,
+5. Initiate the ContPlayer, IContPlayerQueue, ContPlayerCommandsanager in the below manner, 
 
 a) Init Object of ContPlayerView and set lifecycle owner as current activity or fragment
+
 ```
 ContPlayerView contPlayerView = findViewById(R.id.contPlayerView);
 contPlayerView.setLifecycleOwner(this);
     
 ```
     
-b) Get the PlayerQueue feeded with player items     
+b) Get the PlayerQueue feeded with player items    
+
 ```
 IContPlayerQueue contPlayerQueue = getStreamArrayList();
     
 ```
      
 c) Initiate ContPlayerCommandsManager, it will take play, pause, release etc commands 
+
 ````
  ContPlayerCommandsManager contPlayerCommandsManager = new ContPlayerCommandsManager(this, contPlayerQueue);
     
 ```
      
 d) set everything to ContPlayerView object
+
 ```
 contPlayerView.setContPlayerCommandsManager(contPlayerCommandsManager);
 contPlayerView.setResizeMode(Const.RESIZE_MODE_FILL);
@@ -64,6 +68,7 @@ contPlayerView.setPlayerQueue(contPlayerQueue);
 ```
         
 e) start play of ContPlayer
+
 ```
 new Handler().postDelayed(() -> contPlayerView.startPlay(), 300);
     
