@@ -53,7 +53,7 @@ IContPlayerQueue contPlayerQueue = getStreamArrayList();
 
 c) Initiate ContPlayerCommandsManager, it will take play, pause, release etc commands 
 
-````
+```
 ContPlayerCommandsManager contPlayerCommandsManager = new ContPlayerCommandsManager(this, contPlayerQueue);
     
 ```
