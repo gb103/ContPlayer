@@ -15,7 +15,7 @@ implementation project(':library-core')
 
 ```
 
-To use ui part as well :
+To use the ui part :
 ```
 implementation project(':library-ui')
 
