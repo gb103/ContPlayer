@@ -2,9 +2,9 @@
 ContPlayer enables developers to implement the smooth experience of video/audio playing in a easy swipe style which is famous in TikTok and Reels kind of applications.
 
 This implementation is designed into 2 modules.
-a) library-core : Handles core play-pause functionality of playing videos and maintain the player states on smooth scroll.
+a) contplayer-library-core : Handles core play-pause functionality of playing videos and maintain the player states on smooth scroll.
 
-b) library-ui : it offers the default customisable UI, implemented using ViewPager and displays the video items which are added into the player queue.
+b) contplayer-library-ui : it offers the default customisable UI, implemented using ViewPager and displays the video items which are added into the player queue.
 
 Step by Step guide to implement this code into your app :
 
