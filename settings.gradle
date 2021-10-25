@@ -1,2 +1,2 @@
-include ':app', ':library-core', ':library-ui'
+include ':app', ':contplayer-library-core', ':contplayer-library-ui'
 rootProject.name='ContPlayer'
