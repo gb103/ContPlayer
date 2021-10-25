@@ -11,13 +11,13 @@ Step by Step guide to implement this code into your app :
 1. Clone this repository.
 2. To use core part of ContPlayer,
 ```
-implementation project(':library-core')
+implementation project(':contplayer-library-core')
 
 ```
 
 To use the ui part :
 ```
-implementation project(':library-ui')
+implementation project(':contplayer-library-ui')
 
 ```
 
